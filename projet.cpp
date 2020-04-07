@@ -8,7 +8,7 @@
 //les enumeration globales:
 enum CategorieDistance {OK, ATTN, DNGR};
 enum Mode {DETECT, MANVRE};
-enum Manoeuvre {MAN1, MAN2, MAN3, MAN4, MAN5, MAN6}
+enum Manoeuvre {MAN1, MAN2, MAN3, MAN4, MAN5, MAN6, INEXISTANT}
 
 //les variables globales:
 LSD lsd;
@@ -16,7 +16,7 @@ CategorieDistance categorieGauche = OK;
 CategorieDistance categorieDevant = OK;
 CategorieDistance categorieDroite = OK;
 Mode mode = DETECT;
-Manoeuvre manoeuvre // = ?? 
+Manoeuvre manoeuvre = INEXISTANT; 
 
 //les fonctions:
 //permet l'initialisation des portes de la carte.
@@ -44,6 +44,22 @@ void changerMode(Etat modeDonne){
 
 //permet d'executer le mode de detection du robot.
 void modeDetection() {
+
+    //fermer osciloscope, fermer DEL, fermer l'afficheur a 7 segments
+
+    //lire la distance pour sensorG, sensorDev et sensorDr
+
+    //mettre a jour les categories : a refacturer for sure : une fonction qui prend (int distance, senor?)
+    if (distanceLuGauche < 1)
+        sensorGauche.setCategorieDistance(DNGR);
+    if else (distanceLuGauche < 3 && distanceLuGauche >= 1)
+        sensorGauche.setCategorieDistance(ATTN);
+    else
+        sensorGauche.setCategorieDistance(OK);
+    //if (distanceLuDevant < 1)......
+
+    //afficher distnace et categorie
+
     
 }
 
@@ -54,6 +70,16 @@ void modeManoeuvre() {
 
         case MAN1: 
 
+            while (/* pas fin */)
+            {
+                //afficher "Manoeuvre 1"
+                //afficher sur afficheur vitesse des roues
+
+                //note: vert/rouge, neg==reculer, 
+            }
+            //qqc = fin = true
+            
+            
             break;
 
         case MAN2: 
@@ -76,8 +102,10 @@ void modeManoeuvre() {
 
             break;
 
-        default: 
-            
+        case INEXISTANT: 
+
+            //affichage de "Combinaison non evaluee"
+            _delay_ms(2000); //attendre deux seconde
             break;
     }
 }
@@ -108,7 +136,7 @@ int main () {
 
             case MANVRE:
 
-                //liste des ifs pour detrminer le manoeuvre
+                //liste des ifs pour detrminer le manoeuvre : une fonction determinerManouevre?
                 //manoeuvre = 
 
                 //met le robot en mode de manoeuvre
@@ -123,6 +151,4 @@ int main () {
     }
 
     return 0;
-
-    /
 }
